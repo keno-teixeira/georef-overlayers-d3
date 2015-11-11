@@ -1,0 +1,32 @@
+{
+	"type":
+		"FeatureCollection",
+		"features":[
+			{
+				"type":"Feature",
+				"geometry":{
+					"type":"MultiPolygon",
+					"coordinates":[
+						[
+							[
+								[194524.9679,8245986.3297],
+								[194544.2961,8245990.3297],
+								[194559.6867,8245925.3296],
+								[194539.0773,8245924.8296],
+								[194524.9679,8245986.3297]
+							]
+						]
+					]
+				},
+				"properties":{
+					"City":"Águas Claras",
+					"Special":2,
+					"Zone1":0,
+					"Zone2":4,
+					"Zone3":2,
+					"Zone4":1,
+					"Male":7,
+					"Female":0,
+					"Elderly":0,
+					"RII":7,
+					"RIE":0,"Vul":0,"Total":7}

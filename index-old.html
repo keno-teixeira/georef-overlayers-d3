@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="geoApp">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Georeferenciamento CODHAB</title>
+  <meta name="generator" content="Bootply" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <script src="src/lib/angular/angular.js"></script>
+  <script src="src/lib/leaflet/leaflet.js"></script>
+  <script src="src/lib/angular/directive.js"></script>
+  <script src="src/js/georef/app.js"></script>
+  <script src="src/js/georef/georef.js"></script>
+  <script src="src/js/georef/pontuacao.js"></script>
+  <script src="src/js/georef/pontmatch.js"></script>
+  <link rel="stylesheet" href="src/lib/leaflet/leaflet.css" />
+  <link href="src/css/bootstrap.min.css" rel="stylesheet">
+  <link href="src/css/styles.css" rel="stylesheet">
+</head>
+<body  ng-controller="georef">
+  <div class="page-container">
+  <!-- top navbar -->
+  <div class="navbar-superior"></div>
+
+  <nav class="navbar navbar-default navbar-codhab">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+          <a href="http://www.codhab.df.gov.br/" class="navbar-brand"><img src="src/img/codhab.png" height="71" alt="CODHAB"></a>
+    </div>
+    <h1 class="title-nav">Georeferenciamento CODHAB</h1>
+  </div>
+</nav>
+
+
+  <!--
+    <div class="navbar navbar-inverse">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">CODHAB</a>
+      </div>
+    </div>
+  -->
+    <!-- block-container -->
+
+    <div class="block-container">
+      <!-- sidebar -->
+      <div class="mask-tool">
+        <div class="filtro scrollable" >
+            <h3 class="filter">Filtros</h3>
+            <div class="">
+              <form name="myForm">
+                  <div class="">
+                    <label for="lista">Lista: </label><br>
+                    <select class="form-control list" name="lista" id="lista" ng-model="data.lista" multiple>
+                      <option value="1">RII</option>
+                      <option value="2">RIE </option>
+                      <option value="3">Vulneraveis</option>
+                    </select>
+                  </div>
+                  <div class="">
+                    <label for="tipo">Tipo: </label><br>
+                    <select class="form-control type" name="tipo" id="tipo" ng-model="data.tipo" multiple>
+                      <option value="1">Idoso</option>
+                      <option value="2">Deficiente</option>
+                      <option value="3">Sem Con. especial </option>
+                    </select>
+                  </div>
+                  <div class=" ">
+                    <label for="faixa">Faixa: </label><br>
+                    <select class="form-control strip" name="faixa" id="faixa" ng-model="data.faixa" multiple>
+                      <option value="1">Faixa 1</option>
+                      <option value="2">Faixa 2</option>
+                      <option value="3">Faixa 3</option>
+                      <option value="4">Faixa 4</option>
+                    </select>
+                  </div>
+                  <div class=" ">
+                    <label for="sexo">Sexo: </label><br>
+                    <select class="form-control sexo" name="sexo" id="sexo" ng-model="data.sexo" multiple>
+                      <option value="1">Homen</option>
+                      <option value="2">Mulher</option>
+                    </select>
+                  </div>
+                  <div class=" ">
+                    <label for="deps">Depedentes: </label><br>
+                    <select class="form-control dependents" name="deps" id="deps" ng-model="data.deps" multiple>
+                      <option value="1">Deficiente</option>
+                      <option value="2">Sem Con. especial</option>
+                    </select>
+                  </div>
+                  <div class="">
+                      <label for="quantidade">Quantidade: </label><br>
+                      <input
+                        class="form-control quantidade"
+                        name="quantidade" id="quantidade"
+                        placeholder="Quantidade"
+                        ng-model="data.quantidade"
+                        ui-Pontuacao
+                      />
+                  </div>
+                  <div class=" ">
+                    <label for="pontuacao">Pontuação: </label><br>
+                    <input
+                      class="form-control pontuacao"
+                      name="pontuacao" id="pontFrist"
+                      placeholder="valor inicial"
+                      ng-model="pontFrist" ui-Pontuacao
+                    />
+                    <input
+                      class="form-control pontuacao"
+                      name="pontuacao" id="pontLast"
+                      placeholder="valor final"
+                      ng-model="pontLast"
+                      ui-Pontuacao pw-check="pontFrist"
+                    />
+                    <div class="msg-block" ng-show="myForm.$error">
+                      <span class="msg-error" ng-show="myForm.pontLast.$error.ptmatch">
+                        Valor final não é maior.
+                      </span>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-sm btn-success" ng-disabled="myForm.pontLast.$error.ptmatch" ng-click="geojsonSelect(data,pontFrist,pontLast)">Filtrar</button>
+
+              </form>
+            </div>
+          </div>
+          <div class="botao-tool"><span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span></div>
+      </div>
+        <!-- main area -->
+        <div class="map">
+          <leaflet center="brasilia" defaults="defaults" geojson="geojson" legend="legend" controls="controls" class="mapa"></leaflet>
+        </div><!-- /.col-xs-12 main -->
+    </div><!--/.container--><!--/.page-container-->
+  <div id="footer"><!--footer-->
+    <div class="container">
+      <div class="row">
+        <ul class="list-unstyled">
+          <li class="col-sm-4 col-xs-6">
+            <a href="#">Sobre</a>
+          </li>
+          <li class="col-sm-4 col-xs-6">
+            <a href="#">Serviço</a>
+          </li>
+          <li class="col-sm-4 col-xs-6">
+            <a href="#">CODHAB</a>
+          </li>
+        </ul>
+      </div><!--/row-->
+    </div><!--/container-->
+  </div><!--/footer-->
+
+  <!-- script references -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+  <script src="src/js/bootstrap.min.js"></script>
+  <script src="src/js/scripts.js"></script>
+  <script src="src/lib/loading/bootstrap-waitingfor.js"></script>
+    <script src="src/js/mod.js"></script>
+
+</body>
+</html>

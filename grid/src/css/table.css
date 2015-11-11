@@ -1,0 +1,36 @@
+.dataTables_wrapper{
+  background: #fff;
+  padding: 20px 15px;
+  height: 615px;
+}
+.table{
+  font-size: 10px;
+  margin-bottom: 0px;
+}
+.table>thead>tr>th {
+    padding: 5px;
+}
+#detais,
+#detais_wrapper {
+  color: #000;
+}
+.table-detais{
+  margin-bottom: 25px;
+  background: #444;
+  padding: 50px;
+}
+#detais {
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+#detais>thead>tr>th {
+    padding: 10px;
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #7e7e7e;
+}
+.btn-right{
+    float: right;
+    position: relative;
+    left: -15px;
+}
